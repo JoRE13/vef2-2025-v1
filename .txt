@@ -1,0 +1,3 @@
+"dev": "browser-sync start --serveStatic ./dist --server --files ./public/styles.css ./dist/*.*",
+    "build": "vite build",
+    "preview": "vite preview"
