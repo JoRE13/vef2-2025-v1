@@ -1,5 +1,10 @@
 import { readFilesFromDir, readFile } from "./file.js";
 
+/**
+ * Parses the data and returns arrays of all valid pages
+ * @param {string} data the stringified content of json file
+ * @returns array containing the titles of the pages and an array of the files.
+ */
 export async function parseIndexJSON(data) {
   let indexParsed;
   try {
@@ -33,6 +38,12 @@ export async function parseIndexJSON(data) {
   return [indexTitles, indexFiles];
 }
 
+
+/**
+ * Parses the question files and returns an array with the valid questions and answers
+ * @param {string} data content of file to parse 
+ * @returns An array containing the valid questions and answers.
+ */
 export async function parseFileJSON(data) {
   let pageParsed;
   try {
@@ -42,25 +53,29 @@ export async function parseFileJSON(data) {
   }
   const questions = []
   const answers = []
-  if (Array.isArray(pageParsed.questions)){
-    for (const question of pageParsed.questions){
-      if (question.question && question.answers){
-        const questionParsed = await validatePage(question.answers);
-        if( questionParsed ) {
-          questions.push(question.question);
-          answers.push(questionParsed);
-        }
+  
+  for (const question of pageParsed.questions){
+    if (question.question && question.answers){
+      const questionParsed = await validateAnswers(question.answers);
+      if( questionParsed ) {
+        questions.push(question.question);
+        answers.push(questionParsed);
       }
     }
   }
-  else {
-    console.log('questions are not an array')
-  }
+  
   return [questions, answers]
 }
-
-async function validPageFile(pagePath) {
+/**
+ * Checks wether a given a questions file has the right format.
+ * @param {string} pagePath the path of the file to check
+ * @returns true if it is valid and false otherwise
+ */
+export async function validPageFile(pagePath) {
   const data = await readFile(pagePath);
+  if (!data) {
+    return false;
+  }
   let pageParsed;
   try {
     pageParsed = JSON.parse(data);
@@ -68,14 +83,18 @@ async function validPageFile(pagePath) {
     console.log("unable to parse file data");
     return false
   }
-  if (!pageParsed.title || !pageParsed.questions){
+  if (!pageParsed.title || !pageParsed.questions || !Array.isArray(pageParsed.questions)){
     console.log("page format not valid");
     return false
   }
   return true
 }
-
-async function validatePage(data){
+/**
+ * Checks whether the answers are of the correct format.
+ * @param {*} data an JSON array containing the answers 
+ * @returns Returns all valid answers.
+ */
+export async function validateAnswers(data){
   const answers = []
   if (Array.isArray(data)){
     for (const ans of data){
@@ -84,6 +103,9 @@ async function validatePage(data){
       }
     }
   } else {
+    return false;
+  }
+  if (answers.length === 0){
     return false;
   }
   return answers;

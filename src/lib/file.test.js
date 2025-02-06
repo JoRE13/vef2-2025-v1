@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 import { join } from 'path';
-import { direxists, readFile, readFilesFromDir } from './file';
+import { direxists, readFile, readFilesFromDir } from './file.js';
 
 /** Directory that contains test data, relative to the project root. */
 const testDir = './src/test/data';

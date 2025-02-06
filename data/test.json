@@ -1,0 +1,47 @@
+{
+    "title": "Test",
+    "questions": [
+      {
+        "question": "q1",
+        "answers": [
+          {
+            "answer": "a1",
+            "correct": true
+          },
+          {
+            "answer": "a2",
+            "correct": false
+          },
+          {
+            "answer": "a3",
+            "correct": false
+          },
+          {
+            "answer": "a4",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "question": "q2",
+        "answers": [
+          {
+            "answer": "a1",
+            "correct": true
+          },
+          {
+            "answer": "a2",
+            "correct": false
+          },
+          {
+            "answer": "a3",
+            "correct": false
+          },
+          {
+            "answer": "a4",
+            "correct": false
+          }
+        ]
+      }
+    ]
+}

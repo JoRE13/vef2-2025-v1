@@ -1,4 +1,4 @@
-import { readFile, readFilesFromDir, createDirIfNotExists } from "./lib/file.js";
+import { readFile, createDirIfNotExists } from "./lib/file.js";
 import { parseIndexJSON, parseFileJSON} from "./lib/parse.js";
 import { indexTemplate, questionsTemplate } from "./lib/html.js";
 import fs from 'node:fs/promises';
