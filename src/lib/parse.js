@@ -10,6 +10,7 @@ export async function parseIndexJSON(data) {
   try {
     indexParsed = JSON.parse(data);
   } catch (e) {
+    console.log(e);
     throw new Error("unable to parse index data");
   }
   const indexTitles = [];
@@ -49,6 +50,7 @@ export async function parseFileJSON(data) {
   try {
     pageParsed = JSON.parse(data);
   } catch (e) {
+    console.log(e);
     throw new Error("unable to parse file data");
   }
   const questions = []
@@ -80,6 +82,7 @@ export async function validPageFile(pagePath) {
   try {
     pageParsed = JSON.parse(data);
   } catch (e) {
+    console.log(e);
     console.log("unable to parse file data");
     return false
   }

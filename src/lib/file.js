@@ -15,6 +15,7 @@ export async function direxists(dir) {
     const info = await stat(dir);
     return info.isDirectory();
   } catch (e) {
+    console.log(e);
     return false;
   }
 }
@@ -41,6 +42,7 @@ export async function readFilesFromDir(dir) {
     try {
       files = await readdir(dir);
     } catch (e) {
+      console.log(e);
       return [];
     }
   
@@ -81,6 +83,7 @@ export async function readFilesFromDir(dir) {
   
       return content.toString(encoding);
     } catch (e) {
+      console.log(e);
       return null;
     }
   }
